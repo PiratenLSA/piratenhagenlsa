@@ -4,7 +4,8 @@
 Dieses Drupal Theme ist ursprünglich von den Piraten Hagen für Drupal 5.20
 erstellt wurden.
 
-Ersteller:
+**Ersteller:**
+
 * [Seeki](http://wiki.piratenpartei.de/Benutzer:Seeki)
 * [hatch](http://wiki.piratenpartei.de/Benutzer:Hatch)
 * [Tilli](http://wiki.piratenpartei.de/Benutzer:Tilli)
