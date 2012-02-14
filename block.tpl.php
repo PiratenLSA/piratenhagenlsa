@@ -34,7 +34,8 @@
     /* kein fuss bei Teaser */
     if (substr($block->delta, 0, 6 ) != 'Teaser') {
   ?>
-  <div class="blockfuss <?php print !$more ? 'no-' : '' ?>more-link">
+  <!--<div class="blockfuss <?php print !$more ? 'no-' : '' ?>more-link">-->
+  <div class="blockfuss<?php print !$more ? ' no-more-link' : '' ?>">
 
   <?php
       $link = 'Weiter';
@@ -43,9 +44,9 @@
   ?>
 
   <?php if ($more) { ?>
-    <a href="<?php print $my_more_link[1]; ?>" title="<?php print $title; ?>"><?php print $link; ?></a>
+    <!--<a href="<?php print $my_more_link[1]; ?>" title="<?php print $title; ?>"><?php print $link; ?></a>
   </div>
-  <div class="blockfuss2">
+  <div class="blockfuss2">-->
   <?php } ?>
   </div>
 </div>

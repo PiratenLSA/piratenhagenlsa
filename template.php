@@ -126,7 +126,7 @@ function piratenhagenlsa_hexrgb($hexstr) {
 * Create an image with a given text
 * @return string The url to the generated image
 */
-function piratenhagenlsa_createblockimage($prefix, $title, $file_name, $posx=23, $posy=32, $size=11.0, $font_name='FreeSans.ttf', $fontbold_name='FreeSansBold.ttf', $color='FFFFFF', $shadowcolor='000000', $shadowopacity=44) {
+function piratenhagenlsa_createblockimage($prefix, $title, $file_name, $posx=23, $posy=32, $ptSize=11.0, $font_name='FreeSans.ttf', $fontbold_name='FreeSansBold.ttf', $color='FFFFFF', $shadowcolor='000000', $shadowopacity=44) {
   global $theme;
 
   // if title is empty or 'frame' return the frame image
@@ -143,22 +143,16 @@ function piratenhagenlsa_createblockimage($prefix, $title, $file_name, $posx=23,
     mkdir($savepath, 0777, TRUE);
 
   // filename to save
-  $savefile = $savepath . $prefix . '-' . md5($title) . '.png';
+  $savefile = $savepath . $prefix . '-' . sha1($title) . '.png';
 
   // if file exists return the image and do not create it
   if (file_exists($savefile))
     return '/' . $savefile;
-  // Ready strings.
-  $sTitle = explode('##', $title);
-  $sFirst = strtoupper($sTitle[0]);
-  $sLettersFirst = str_split($sFirst);
-  $sLast = strtoupper($sTitle[1]);
-  $sLettersLast = str_split($sLast);
+
   $sBgIm = drupal_get_path('theme', $theme) . '/' . $file_name;
 
   $pthFt = $fontpath . $font_name;
   $pthFtBd = $fontpath . $fontbold_name;
-  $ptSize = $size;
 
   // hex to rgb
   $color_rgb = piratenhagenlsa_hexrgb($color);
@@ -170,26 +164,25 @@ function piratenhagenlsa_createblockimage($prefix, $title, $file_name, $posx=23,
   // Ready palette.
   $colTextShadow = imagecolorallocatealpha($imgCanvas, $shadowcolor_rgb['r'], $shadowcolor_rgb['g'], $shadowcolor_rgb['b'], $shadowopacity);
   $colText = imagecolorallocatealpha($imgCanvas, $color_rgb['r'], $color_rgb['g'], $color_rgb['b'], 0);
+  
+  // Ready strings.
+  $sTitle = explode('##', $title, 2);
+  $sFirst = strtoupper($sTitle[0]);
+  
+  imagettftext($imgCanvas, $ptSize, 0, $posx + 1, $posy + 1, $colTextShadow, $pthFt, $sFirst);
+  imagettftext($imgCanvas, $ptSize, 0, $posx, $posy, $colText, $pthFt, $sFirst);
+  
+  if (count($sTitle) == 2) {
+    $sLast = strtoupper($sTitle[1]);
 
-  // Paint main strings per character (to maintain kerning).
-  // Begin left.
-  $iLetterPos = 0;
-  for ($i = 0; $i < count($sLettersFirst); $i++) {
-    // Write shadow and normal text.
-    imagettftext($imgCanvas, $ptSize, 0, $posx + 1 + $iLetterPos, $posy + 1, $colTextShadow, $pthFt, $sLettersFirst[$i]);
-    imagettftext($imgCanvas, $ptSize, 0, $posx + $iLetterPos, $posy, $colText, $pthFt, $sLettersFirst[$i]);
-
-    // Get X-coordinate for next character.
-    $bboxLetter = imagettfbbox($ptSize, 0, $pthFt, $sLettersFirst[$i]);
-    $iLetterPos += $bboxLetter[2] + 0;
-  }
-
-  $iLetterPos += $sLettersFirst[$i] == ' ' ? 0 : 1;
-  for ( $i = 0; $i < count( $sLettersLast ); $i++ ) {
-    imagettftext($imgCanvas, $ptSize, 0, $posx + 1 + $iLetterPos, $posy + 1, $colTextShadow, $pthFtBd, $sLettersLast[$i]);
-    imagettftext($imgCanvas, $ptSize, 0, $posx + $iLetterPos, $posy, $colText, $pthFtBd, $sLettersLast[$i]);
-    $bboxLetter = imagettfbbox($ptSize, 0, $pthFtBd, $sLettersLast[$i]);
-    $iLetterPos += $bboxLetter[2] + 0;
+    $bboxLetter = imagettfbbox($ptSize, 0, $pthFt, $sFirst);
+    $startbold = $bboxLetter[2] + 2;
+  
+    if (substr($sFirst, 0, 1) != ' ')
+      $startbold += 1;
+    
+    imagettftext($imgCanvas, $ptSize, 0, $posx + 1 + $startbold, $posy + 1, $colTextShadow, $pthFtBd, $sLast);
+    imagettftext($imgCanvas, $ptSize, 0, $posx + $startbold, $posy, $colText, $pthFtBd, $sLast);
   }
 
   // Finish the job.
