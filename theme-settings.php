@@ -18,7 +18,7 @@ function piratenhagenlsa_settings($saved_settings) {
 
   $settings = array_merge($defaults, $saved_settings);
 
-  $form['piratenhagen_smallbuttons'] = array(
+  $form['piratenhagenlsa_smallbuttons'] = array(
     '#type' => 'checkbox',
     '#title' => t('Benutze kleine Block Köpfe'),
     '#default_value' => $settings['piratenhagenlsa_smallbuttons'],
