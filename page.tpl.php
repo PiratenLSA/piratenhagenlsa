@@ -42,6 +42,8 @@
         </div>
         <?php endif; ?>
 
+        <div id="linksaussen">&nbsp;</div>
+
         <?php if ($left): ?>
         <div id="links">
           <div id="sidebarl">
@@ -71,6 +73,8 @@
           </div>
         </div>
         <?php endif; ?>
+
+        <div id="rechtsaussen">&nbsp;</div>
 
         <div class="clr"></div>
 

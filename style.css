@@ -130,24 +130,28 @@ h2.pagetitle {
 	color: black;
 }
 #container { border: 0px; width: 964px;  background-image: url(images/bcontainer.gif); vertical-align: top}
+#linksaussen, #rechtsaussen {
+	float: left;
+	width: 10px;
+	min-height: 10px;
+}
 #links {
 	float: left;
 	width: 198px;
-	padding-left: 10px;
-	padding-right: 10px;
+	min-height: 10px;
 }
 #mitte {
 	float: left;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
 	text-align: left;
 	width: 508px;
+	min-height: 10px;
 }
 #rechts {
 	float: left;
 	width: 198px;
-	padding-left: 10px;
-	padding-right: 10px;
+	min-height: 10px;
 }
 #unten {
 	background-image: url(images/bcontainerunten.png);
