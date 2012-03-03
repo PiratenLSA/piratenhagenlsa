@@ -2,10 +2,10 @@
   // $title, $file_name, $posx=23, $posy=32, $size=11.0, $font_name='FreeSans.ttf', $fontbold_name='FreeSansBold.ttf', ......
 
   if (theme_get_setting('piratenhagenlsa_smallbuttons') == 1) {
-    $blockimage = piratenhagenlsa_createblockimage('small', $block->subject, 'button-klein.png', 23, 26, 10.5);
+    $blockimage = piratenhagenlsa_createblockimage('small', $block->subject, 'button-klein.png', 23, 26, 10.0);
     $blockheight = 36;
   } else {
-    $blockimage = piratenhagenlsa_createblockimage('big', $block->subject, 'button.png', 23, 32, 11.0);
+    $blockimage = piratenhagenlsa_createblockimage('big', $block->subject, 'button.png', 23, 32, 10.5);
     $blockheight = 52;
   }
 ?>
