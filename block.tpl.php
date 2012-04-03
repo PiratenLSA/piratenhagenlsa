@@ -24,9 +24,9 @@
   <div class="blockinhalt">
   <?php
     /* --- MORE-LINK FILTERING - hatch 2009-11-17 */
-    $more = ( strpos( strval( $block->content ), "more-link" ) > 0 );
-    preg_match( '#<div class=[\'"]?more-link[\'"]?><a href="([^"]*)"(?:[^>]*title="([^"]*)"[^>]*|)>[^<]*</a></div>#', $block->content, $my_more_link );
-    print preg_replace('#<div class=[\'"]more-link[\'"].*?</div>#', '', $block->content );
+    $more = ( strpos( strval( $content ), "more-link" ) > 0 );
+    preg_match( '#<div class=[\'"]?more-link[\'"]?><a href="([^"]*)"(?:[^>]*title="([^"]*)"[^>]*|)>[^<]*</a></div>#', $content, $my_more_link );
+    print preg_replace('#<div class=[\'"]more-link[\'"].*?</div>#', '', $content );
   ?>
   </div>
 

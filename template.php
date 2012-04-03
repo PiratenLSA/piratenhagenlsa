@@ -1,31 +1,40 @@
 <?php
 
-function piratenhagenlsa_calendar_ical_icon($url) {
-  if ($image = theme('image', drupal_get_path('theme', 'piratenhagenlsa') .'/images/ical-icon.png', t('Add to calendar'), t('Add to calendar'))) {
+function piratenhagenlsa_calendar_ical_icon($variables) {
+  $url = $variables['url'];
+
+  if ($image = theme('image', array('path' => drupal_get_path('theme', 'piratenhagenlsa') .'/images/ical-icon.png', 'alt' => t('Add to calendar'), 'title' => t('Add to calendar')))) {
     return '<div style="text-align:right"><a href="'. check_url($url) .'" class="ical-icon" title="ical">'. $image .'</a></div>';
   }
 }
 
-function piratenhagenlsa_breadcrumb($breadcrumb) {
+function piratenhagenlsa_breadcrumb($variables) {
+  $breadcrumb = $variables['breadcrumb'];
+
   if (!empty($breadcrumb)) {
     return '<div class="breadcrumb">Sie befinden sich auf: '. implode(' ', $breadcrumb) .'</div>';
   }
 }
 
 /* --- NODE/Pager - hatch 2009-12-23 */
-function piratenhagenlsa_pager($tags = array(), $limit = 4, $element = 0, $parameters = array()) {
-	global $pager_total;
-	if ($pager_total[$element] > 1) {
-		$output .= '<div class="pager">';
-		$output .= theme('pager_first', ($tags[0] ? $tags[0] : t('« first')), $limit, $element, $parameters);
-		$output .= theme('pager_previous', ($tags[1] ? $tags[1] : t('‹ previous')), $limit, $element, 1, $parameters);
-		/*$output .= theme('pager_list', $limit, $element, ($tags[2] ? $tags[2] : 4 ), '', $parameters);*/
-		$output .= "&emsp;";
-		$output .= theme('pager_next', ($tags[3] ? $tags[3] : t('next ›')), $limit, $element, 1, $parameters);
-		$output .= theme('pager_last', ($tags[4] ? $tags[4] : t('last »')), $limit, $element, $parameters);
-		$output .= '</div><div class="pagerseparator"></div>';
-		return $output;
-	}
+function piratenhagenlsa_pager($variables) {
+  $tags = $variables['tags'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  $quantity = $variables['quantity'];
+  global $pager_page_array, $pager_total;
+
+  if ($pager_total[$element] > 1) {
+    $output = '<div class="pager">';
+    $output .= theme('pager_first', array('text' => (isset($tags[0]) ? $tags[0] : t('« first')), 'element' => $element, 'parameters' => $parameters));
+    $output .= theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : t('‹ previous')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+    /*$output .= theme('pager_list', $limit, $element, ($tags[2] ? $tags[2] : 4 ), '', $parameters);*/
+    $output .= "&emsp;";
+    $output .= theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('next ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+    $output .= theme('pager_last', array('text' => (isset($tags[4]) ? $tags[4] : t('last »')), 'element' => $element, 'parameters' => $parameters));
+    $output .= '</div><div class="pagerseparator"></div>';
+    return $output;
+  }
 }
 
 /**
@@ -36,25 +45,25 @@ function piratenhagenlsa_pager($tags = array(), $limit = 4, $element = 0, $param
 function emailkodieren($strEmail) {
   // per Hand mailto: maskiert
   $strMailto = "&#109;&#097;&#105;&#108;&#116;&#111;&#058;";
-    
-  // Schleife, um email-Adresse zu maskieren 
-  $strEncodedEmail="";    
+
+  // Schleife, um email-Adresse zu maskieren
+  $strEncodedEmail="";
   for ($i=0; $i < strlen($strEmail); $i++) {
      // ord gibt den ascii-Wert des ersten Zeichens eines strings zurueck
      // dieser string ist der substring ab Position $i der email-Adresse
      $strEncodedEmail .= "&#".ord(substr($strEmail,$i)).";";
   }
-    
+
   return $strEncodedEmail;
 }
 
-function phptemplate_node_submitted($node) {
+/*function phptemplate_node_submitted($node) {
   return t('!datetime',
     array(
       '!username' => theme('username', $node),
       '!datetime' => format_date($node->created, 'large'),
     ));
-}
+}*/
 
 function piratenhagenlsa_menubarlinks($links, $attributes = array('class' => 'links')) {
   global $language;
@@ -136,7 +145,7 @@ function piratenhagenlsa_createblockimage($prefix, $title, $file_name, $posx=23,
   // path to the font directory
   $fontpath = drupal_get_path('theme', 'piratenhagenlsa') . '/fonts/';
   // path to the directory with the block images
-  $savepath = file_directory_path() . '/' . $theme . '/blockimage/';
+  $savepath = variable_get('file_public_path', conf_path() . '/files') . '/' . $theme . '/blockimage/';
 
   // if directory do not exists: create it
   if (!file_exists($savepath))
@@ -164,23 +173,23 @@ function piratenhagenlsa_createblockimage($prefix, $title, $file_name, $posx=23,
   // Ready palette.
   $colTextShadow = imagecolorallocatealpha($imgCanvas, $shadowcolor_rgb['r'], $shadowcolor_rgb['g'], $shadowcolor_rgb['b'], $shadowopacity);
   $colText = imagecolorallocatealpha($imgCanvas, $color_rgb['r'], $color_rgb['g'], $color_rgb['b'], 0);
-  
+
   // Ready strings.
   $sTitle = explode('##', $title, 2);
   $sFirst = strtoupper($sTitle[0]);
-  
+
   imagettftext($imgCanvas, $ptSize, 0, $posx + 1, $posy + 1, $colTextShadow, $pthFt, $sFirst);
   imagettftext($imgCanvas, $ptSize, 0, $posx, $posy, $colText, $pthFt, $sFirst);
-  
+
   if (count($sTitle) == 2) {
     $sLast = strtoupper($sTitle[1]);
 
     $bboxLetter = imagettfbbox($ptSize, 0, $pthFt, $sFirst);
     $startbold = $bboxLetter[2] + 2;
-  
+
     if (substr($sFirst, 0, 1) != ' ')
       $startbold += 1;
-    
+
     imagettftext($imgCanvas, $ptSize, 0, $posx + 1 + $startbold, $posy + 1, $colTextShadow, $pthFtBd, $sLast);
     imagettftext($imgCanvas, $ptSize, 0, $posx + $startbold, $posy, $colText, $pthFtBd, $sLast);
   }

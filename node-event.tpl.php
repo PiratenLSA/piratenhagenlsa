@@ -5,7 +5,9 @@ $commentzeusch = $node->links['comment_comments'] ? $node->links['comment_commen
 <div id="node-<?php print $node->nid; ?>" class="node<?php if ($sticky) { print ' sticky'; } ?><?php if (!$status) { print ' node-unpublished'; } ?>">
 
 <?php if ($page == 0): ?>
+<?php print render($title_prefix); ?>
 <div class="nodeTitle"><a class="nodeTitle" href="<?php print $node_url ?>" title="Diesen Beitrag aufrufen."><?php print $title; ?></a></div>
+<?php print render($title_suffix); ?>
 <?php endif; ?>
 
   <div class="haupttext">
@@ -24,13 +26,13 @@ $commentzeusch = $node->links['comment_comments'] ? $node->links['comment_commen
     </div>
   </div>
 
-  <?php if ($page != 0 && module_exists('taxonomy') && $taxonomy): ?>
-    <div class="nodeTags">
+  <?php //if ($page != 0 && module_exists('taxonomy') && $taxonomy): ?>
+    <!-- <div class="nodeTags">
       <div style="float: left">Tags:</div>
-      <div style="float: left"><?php print theme('links', taxonomy_link('taxonomy terms', $node), array('class' => 'tags')); ?></div>
+      <div style="float: left"><?php //print theme('links', taxonomy_link('taxonomy terms', $node), array('class' => 'tags')); ?></div>
       <div style="clear: both;"></div>
-    </div>
-  <?php endif;?>
+    </div> -->
+  <?php //endif;?>
 
   <?php if ($links && (!$sticky || ($sticky && $page != 0))) { ?>
   <div class="nodeLinks">

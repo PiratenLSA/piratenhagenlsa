@@ -204,22 +204,22 @@ h2.pagetitle {
 }
 
 /* --- BLOCK - hatch 2009-10-02 */
-.block {
+.sidebar .block {
 	margin-bottom: 14px;
 	width: 198px;
 }
 
-.block .frame {
+.sidebar .block .frame {
 	height: 6px;
 }
 
-.blockkopf {
+.sidebar .blockkopf {
 	/*height: 36px; #### 52px; */
 	background-position: bottom center;
 	background-repeat: no-repeat;
 }
 
-.blockinhalt {
+.sidebar .blockinhalt {
         border-left: 1px solid #e6eef4;
 	border-right: 1px solid #e6eef4;
 	color: black;
@@ -229,16 +229,16 @@ h2.pagetitle {
 	text-align: left;
 	width: 196px;
 }
-.blockinhalt a {
+.sidebar .blockinhalt a {
 	border: 0;
 	color: black;
 	text-decoration: none;
 }
-.blockinhalt a:hover {
+.sidebar .blockinhalt a:hover {
 	color: darkorange;
 	text-decoration: underline;
 }
-.blockinhalt p {
+.sidebar .blockinhalt p {
 	margin: 0 0.3em 4px 6px;
 	padding: 0 4px;
 }
@@ -248,7 +248,7 @@ h2.pagetitle {
 /*.blockfuss {
 	height: 6px;
 }*/
-.blockfuss2 {
+.sidebar .blockfuss2 {
 	background: #e6eef4 bottom left no-repeat url(images/bottom_more_inv.png);
 	height: 6px;
 }
@@ -279,14 +279,14 @@ h2.pagetitle {
 #block-menu-91 ul.menu {
 	margin-bottom: -6px;
 }
-#block-user-1 div.blockinhalt {
+#block-system-navigation div.blockinhalt {
 	padding-bottom: 0;
 }
-#block-user-1 div.blockfuss {
+#block-system-navigation div.blockfuss {
 	background: #e6eef4 bottom left no-repeat url(images/bottom_more_inv.png);
 	height: 6px;
 }
-#block-user-1 ul.menu {
+#block-system-navigation ul.menu {
 	margin-bottom: -6px;
 }
 
@@ -419,13 +419,13 @@ h2.pagetitle {
 	color: darkorange;
 	text-decoration: underline;
 }
-.block .view-label-node-title {
+.sidebar .block .view-label-node-title {
 	display: none;
 }
-.block .view-label-node-body {
+.sidebar .block .view-label-node-body {
 	display: none;
 }
-.block .view-data-node-created {
+.sidebar .block .view-data-node-created {
 	display: none;
 }
 .view-data-node-title {
@@ -465,7 +465,7 @@ h2.pagetitle {
 	background: top center no-repeat url(images/block-no-more.png);
 	height: 6px;
 }
-.block .more-link {
+.sidebar .block .more-link {
 	background: #e6eef4 top center no-repeat url(images/pfeil_more_inv.png);
 	border: 0;
 	font-size: 9pt;
@@ -475,15 +475,15 @@ h2.pagetitle {
 	padding-left: 10px;
 	text-align: left;
 }
-.block .more-link a {
+.sidebar .block .more-link a {
 	color: dimgray;
 	text-decoration: none;
 }
-.block .more-link a:hover {
+.sidebar .block .more-link a:hover {
 	color: black;
 	text-decoration: underline;
 }
-.block .more-link a:before {
+.sidebar .block .more-link a:before {
 	content: url(images/inline-more-link-before.png);
 }
 
@@ -500,22 +500,22 @@ h2.pagetitle {
 }
 
 /* --- BLOCK/Listen - hatch 2009-10-02 */
-.block .item-list {
+.sidebar .block .item-list {
 	padding-left: 10px;
 	padding-right: 4px;
 }
-.block .item-list ul {
+.sidebar .block .item-list ul {
 	margin-left: -11px;
 	padding-top: 0.15em;
 }
-.block .item-list ul li {
+.sidebar .block .item-list ul li {
 	padding-right: 0.3em;
 	list-style-image: url(images/leaf.png);
 	padding-top: 0.15em;
 }
 
 /* --- BLOCK/Spenden - hatch 2009-11-28 */
-.block .view-spenden {
+.sidebar .block .view-spenden {
 	padding: 0 8px;
 }
 
@@ -908,16 +908,16 @@ a.nodeTitle:hover {
 }
 
 /* --- USER/Login - hatch 2009-11-24 */
-#block-user-0 form label {
+#block-user-login form label {
 	padding-left: 8px;
 }
-#block-user-0 form {
+#block-user-login form {
 	text-align: left;
 }
-#block-user-0 .form-submit {
+#block-user-login .form-submit {
 	margin-left: 8px;
 }
-#block-user-0 .form-text {
+#block-user-login .form-text {
 	margin-left: 8px;
 	width: 180px;
 }
@@ -1390,7 +1390,7 @@ table .mini-day-on a {
   padding: 3px 15px 0 0;
 }
 
-.block-tagadelic .blockinhalt {
+.sidebar  .block-tagadelic .blockinhalt {
   padding-left: 8px;
   padding-right: 8px;
   width: 180px;

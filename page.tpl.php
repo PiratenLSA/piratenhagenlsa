@@ -1,16 +1,7 @@
 <?php
-  $seclinks = theme('links', $secondary_links, array('class' => 'menu'));
+  $seclinks = theme('links', array('links' => $secondary_menu, 'attributes' => array('class' => 'menu')));
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php print $language->language ?>" xml:lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
-  <head>
-    <title><?php print $head_title; ?></title>
-    <?php print $head; ?>
-    <?php print $styles; ?>
-    <?php print $scripts; ?>
-  </head>
 
-  <body>
     <?php if (trim($seclinks) != ''): ?><div style="height: 6px; background-color: #8b9096;"></div><?php endif; ?>
     <div style="margin: 0 auto; width: 964px">
       <?php if (trim($seclinks) != ''): ?>
@@ -28,7 +19,7 @@
       <?php if (theme_get_setting('piratenhagenlsa_alternativestyle') != 1): ?>
       <div id="toplinks">
         <div class="toplinkstext">
-          <?php print piratenhagenlsa_menubarlinks($primary_links, array('class' => 'links-menu')); ?>
+          <?php print piratenhagenlsa_menubarlinks($main_menu, array('class' => 'links-menu')); ?>
         </div>
       </div>
       <?php else: ?>
@@ -44,32 +35,32 @@
 
         <div id="linksaussen">&nbsp;</div>
 
-        <?php if ($left): ?>
+        <?php if ($page['sidebar_first']): ?>
         <div id="links">
-          <div id="sidebarl">
-            <?php print $left ?>
+          <div id="sidebarl" class="sidebar">
+            <?php print render($page['sidebar_first']); ?>
           </div>
         </div>
         <?php endif; ?>
 
-        <div id="mitte" style="width: <?php print 508 + (!$left ? 198 : 0) + (!$right ? 198 : 0) ?>px">
+        <div id="mitte" style="width: <?php print 508 + (!$page['sidebar_first'] ? 198 : 0) + (!$page['sidebar_second'] ? 198 : 0) ?>px">
           <div id="brot">
             <?php print $breadcrumb ?>
           </div>
-          <?php if ($mission): print '<div id="mission">'. $mission .'</div>'; endif; ?>
-          <?php if ($tabs): print '<div id="tabs-wrapper" class="clear-block">'; endif; ?>
+          <?php if ($page['highlighted']): print '<div id="mission">'. render($page['highlighted']) .'</div>'; endif; ?>
+          <?php if ($tabs): print '<div id="tabs-wrapper" class="clearfix">'; endif; ?>
           <?php if ($title): print '<h2'. ($tabs ? ' class="with-tabs pagetitle"' : ' class="pagetitle"') .'>'. $title .'</h2>'; endif; ?>
-          <?php if ($tabs): print '<ul class="tabs primary">'. $tabs .'</ul></div>'; endif; ?>
-          <?php if ($tabs2): print '<ul class="tabs secondary">'. $tabs2 .'</ul>'; endif; ?>
+          <?php if ($tabs): print '<ul class="tabs primary">'. render($tabs) .'</ul></div>'; endif; ?>
+          <?php //if ($tabs2): print '<ul class="tabs secondary">'. render($tabs2) .'</ul>'; endif; ?>
           <?php if ($show_messages && $messages): print $messages; endif; ?>
-          <?php print $help ?>
-          <?php print $content; ?>
+          <?php print render($page['help']); ?>
+          <?php print render($page['content']); ?>
         </div>
 
-        <?php if ($right): ?>
+        <?php if ($page['sidebar_second']): ?>
         <div id="rechts">
-          <div id="sidebarr">
-            <?php print $right ?>
+          <div id="sidebarr" class="sidebar">
+            <?php print render($page['sidebar_second']); ?>
           </div>
         </div>
         <?php endif; ?>
@@ -85,15 +76,8 @@
 
     <div id="fusslinie">
       <?php
-        if ($footer) { 
-          print $footer;
-          print "<br /><br />";
-        }
-      ?>
-
-      <?php
-        if ($footer_message) {
-          print $footer_message;
+        if ($page['footer']) {
+          print render($page['footer']);
           print "<br /><br />";
         }
       ?>
@@ -105,7 +89,3 @@
     </div>
 
     <!-- TagMonitoring -->
-
-  <?php print $closure ?>
-  </body>
-</html>

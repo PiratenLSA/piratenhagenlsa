@@ -1,30 +1,32 @@
-<?php 
-$commentzeusch = $node->links['comment_comments'] ? $node->links['comment_comments'] : $node->links['comment_add'];
+<?php
+$commentzeusch = '';//$node->links['comment_comments'] ? $node->links['comment_comments'] : $node->links['comment_add'];
 ?>
 
 <div id="node-<?php print $node->nid; ?>" class="node<?php if ($sticky) { print ' sticky'; } ?><?php if (!$status) { print ' node-unpublished'; } ?>">
 
 <?php if ($page == 0): ?>
+<?php print render($title_prefix); ?>
 <div class="nodeTitle"><a class="nodeTitle" href="<?php print $node_url ?>" title="<?php print $title ?>"><?php print $title; ?></a></div>
+<?php print render($title_suffix); ?>
 <?php endif; ?>
 <?php if (theme_get_setting('piratenhagenlsa_printauthors') == 1): ?>
 <div style="color: grey; font-size: 8pt;">erstellt von <?php print $name; ?></div>
 <?php endif; ?>
 
   <div class="haupttext">
-	<?php print $content; ?>
+	<?php print render($content); ?>
 	<?php if ($page != 0 && module_exists('creativecommons')) print $node->cc->get_html(); ?>
   </div>
 
-  <?php if ($page != 0 && module_exists('taxonomy') && $taxonomy): ?>
-    <div class="nodeTags">
+  <?php //if ($page != 0 && module_exists('taxonomy') && $taxonomy): ?>
+    <!-- <div class="nodeTags">
       <div style="float: left">Tags:</div>
-      <div style="float: left"><?php print theme('links', taxonomy_link('taxonomy terms', $node), array('class' => 'tags')); ?></div>
+      <div style="float: left"><?php //print theme('links', taxonomy_link('taxonomy terms', $node), array('class' => 'tags')); ?></div>
       <div style="clear: both;"></div>
-    </div>
-  <?php endif;?>
+    </div> -->
+  <?php //endif;?>
 
-  <?php if ($links && (!$sticky || ($sticky && $page != 0))) { ?>
+  <?php if (/*$links &&*/ (!$sticky || ($sticky && $page != 0))) { ?>
   <div class="nodeLinks">
 	<div class="comment_left"></div>
 	<div class="comment_right">
@@ -50,7 +52,7 @@ $commentzeusch = $node->links['comment_comments'] ? $node->links['comment_commen
           if (module_exists('flattr')) {
             $account = user_load($node->uid);
             if (user_access('use flattr', $account) && $account->flattr['uid']) {
-              print theme('flattr_button', $node, $account);
+              print theme('flattr_button', array('node' => $node, 'account' => $account));
             }
           }
         ?>
