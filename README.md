@@ -38,5 +38,7 @@ lizenziert.
 
 ## Drupal 7
 
-Derzeit ist keine Portierung auf Drupal 7 geplant. Gerne werden Zuarbeiten
-angenommen.
+Eine erste Portierung wurde vorgenommen. Es existieren aber noch einige Bugs, die noch gefixt werden
+müssen.
+
+Die Portierung findet man im Branch "drupal7".
