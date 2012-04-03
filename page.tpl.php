@@ -48,11 +48,16 @@
             <?php print $breadcrumb ?>
           </div>
           <?php if ($page['highlighted']): print '<div id="mission">'. render($page['highlighted']) .'</div>'; endif; ?>
-          <?php if ($tabs): print '<div id="tabs-wrapper" class="clearfix">'; endif; ?>
-          <?php if ($title): print '<h2'. ($tabs ? ' class="with-tabs pagetitle"' : ' class="pagetitle"') .'>'. $title .'</h2>'; endif; ?>
-          <?php if ($tabs): print '<ul class="tabs primary">'. render($tabs) .'</ul></div>'; endif; ?>
-          <?php //if ($tabs2): print '<ul class="tabs secondary">'. render($tabs2) .'</ul>'; endif; ?>
-          <?php if ($show_messages && $messages): print $messages; endif; ?>
+
+          <?php if ($tabs): ?><div id="tabs-wrapper" class="clearfix"><?php endif; ?>
+          <?php print render($title_prefix); ?>
+          <?php if ($title): ?>
+            <h2 class="<?php print $tabs ? 'with-tabs ' : '' ?>pagetitle"><?php print $title ?></h2>
+          <?php endif; ?>
+          <?php print render($title_suffix); ?>
+          <?php if ($tabs): ?><?php print render($tabs); ?></div><?php endif; ?>
+          <?php print render($tabs2); ?>
+          <?php print $messages; ?>
           <?php print render($page['help']); ?>
           <?php print render($page['content']); ?>
         </div>
@@ -78,7 +83,6 @@
       <?php
         if ($page['footer']) {
           print render($page['footer']);
-          print "<br /><br />";
         }
       ?>
 

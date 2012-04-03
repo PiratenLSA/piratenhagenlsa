@@ -461,7 +461,7 @@ h2.pagetitle {
 }
 
 /* --- BLOCK/Weiterlesen - hatch 2009-11-10 */
-.block .no-more-link {
+.sidebar .block .no-more-link {
 	background: top center no-repeat url(images/block-no-more.png);
 	height: 6px;
 }
