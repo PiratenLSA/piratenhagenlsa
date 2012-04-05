@@ -2,7 +2,7 @@
 
 <?php print render($title_prefix); ?>
 <?php if (!$page): ?>
-<h2<?php print $title_attributes; ?> class="nodeTitle"><a href="<?php print $node_url; ?>" class="nodeTitle"><?php print $title; ?></a></h2>
+<div<?php print $title_attributes; ?> class="nodeTitle"><a href="<?php print $node_url; ?>" class="nodeTitle"><?php print $title; ?></a></div>
 <?php endif; ?>
 <?php print render($title_suffix); ?>
 
@@ -27,6 +27,10 @@
 
   <?php if (/*$links &&*/ (!$sticky || ($sticky && $page != 0))) { ?>
   <div class="nodeLinks">
+        <?php
+          if (!empty($content['links']['comment']['#links']['comment-comments']))
+            unset($content['links']['comment']['#links']['comment-add']);
+        ?>
 	<?php if (!empty($content['links']['comment']['#links'])): ?>
           <div class="comment_left"></div>
           <div class="comment_right">
