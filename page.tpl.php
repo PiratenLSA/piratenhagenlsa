@@ -99,7 +99,7 @@
       ?>
 
       <span id="serverinfo">
-        <a href="https://github.com/christophlsa/piratenhagenlsa">Design</a> von den <a href="http://piraten-hagen.de">Piraten Hagen</a>.
+        <a href="https://github.com/PiratenLSA/piratenhagenlsa">Design</a> von den <a href="http://piraten-hagen.de">Piraten Hagen</a>.
         <br />Angepasst von der <a href="http://www.piraten-lsa.de">Piratenpartei Sachsen-Anhalt</a>.
       </span>
     </div>
